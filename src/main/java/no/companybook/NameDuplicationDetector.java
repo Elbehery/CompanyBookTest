@@ -314,38 +314,23 @@ public class NameDuplicationDetector {
     public static void main(String[] args) {
 
 
-        List<String> names = new LinkedList<>();
-        names.add("Bill Gates");
-        names.add("Gates Bill");
-        names.add("Bill Henry Gates");
-        names.add("William Gates");
-        names.add("Walter Gates");
-        names.add("William Henry Gatez");
-
-/*
-        names.add("Eric Rudder");
-        names.add("Eric D Rudder");
-        names.add("Ted Turner");
-        names.add("Rudder Eric");
-        names.add("Mustafa Elbehery");
-        names.add("Turner Ted");
-        names.add("Joshua Rosenkranz");
-        names.add(" Rosenkranz E Joshua");
-        names.add("Eric Rudder");
-        names.add("Joshua Rosenkranz");
-        names.add("Elbehery Mustafa");
-        names.add("Elbehery elsayed Mustafa");
-
-        Collections.shuffle(names);
-        */
         NameDuplicationDetector nameDuplicationDetector = new NameDuplicationDetector();
-        List<Pair<String, String>> result = nameDuplicationDetector.checkDuplicates(names);
+
+        List<String> inputTestNames = null;
+        try {
+
+            inputTestNames = FileUtils.readLines(new File(loader.getResource("data/names.input").getFile()));
+
+        } catch (IOException e) {
+
+            System.err.println("Reading Test Names file causes error due to " + e.getCause());
+        }
+
+        List<Pair<String, String>> result = nameDuplicationDetector.checkDuplicates(inputTestNames);
 
         for (Pair pair : result) {
             System.out.println(pair.getL() + "\t" + pair.getR());
         }
-
-
     }
 
 }
